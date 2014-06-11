@@ -1,12 +1,12 @@
 	
-alert("inside Tile.Js");
+//alert("inside Tile.Js");
 
-try {
+/*try {
 		sap.ui.getCore().loadLibrary("sap.ui.commons");
 	} catch (e) {
 		alert("This test page requires the library 'sap.ui.commons' which is not available.");
 		throw (e);
-	}
+	}*/
 
 	oSelectNewsPaper = new sap.m.Select({
 		type : sap.m.SelectType.Default,
