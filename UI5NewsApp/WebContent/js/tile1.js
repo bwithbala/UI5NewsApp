@@ -1,5 +1,5 @@
 	
-alert("inside Tile.Js");
+//alert("inside Tile.Js");
 
 /*try {
 		sap.ui.getCore().loadLibrary("sap.ui.commons");
