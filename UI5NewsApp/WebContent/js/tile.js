@@ -1,0 +1,269 @@
+	
+alert("inside Tile.Js");
+
+try {
+		sap.ui.getCore().loadLibrary("sap.ui.commons");
+	} catch (e) {
+		alert("This test page requires the library 'sap.ui.commons' which is not available.");
+		throw (e);
+	}
+
+	oSelectNewsPaper = new sap.m.Select({
+		type : sap.m.SelectType.Default,
+		autoAdjustWidth : true,
+		items : [ oItemMaalaiMalar = new sap.ui.core.Item({
+			key : "0",
+			text : "Maalai Malar",
+		}),
+
+		oItemDailyThanthi = new sap.ui.core.Item({
+			key : "1",
+			text : "Daily Thanthi",
+		}),
+
+		oItemDinaKaran = new sap.ui.core.Item({
+			key : "2",
+			text : "Dina Karan",
+		}) ]
+	});
+
+	var Bar = new sap.m.Bar({
+		contentLeft : [ new sap.m.Button('SlideRight', {
+			text : "SlideRight",
+			type : sap.m.ButtonType.accept,
+			press : function() {
+				oContainer.setSecondaryContentWidth("300px");
+				oContainer.setShowSecondaryContent(!oContainer
+						.getShowSecondaryContent());
+			}
+		}) ],
+		contentMiddle : [ oSelectNewsPaper
+
+		],
+	//contentRight: [new sap.m.Button('Button1', {text: "Edit"})]
+	});
+
+	var d = sap.ui.Device;
+
+	var aData = {
+		feedEntries : [
+				{
+
+					title : "http://www.maalaimalar.com/RSS/SectionRssFeed.aspx?Id=1&Main=18",
+					description : "Maalai Malar - Head Lines",
+					icon : "sap-icon://employee",
+
+				},
+				{
+
+					title : "http://www.maalaimalar.com/RSS/SectionRssFeed.aspx?Id=19&Main=18",
+					description : "Maalai Malar - Head Lines",
+					icon : "sap-icon://documents",
+
+				},
+				{
+
+					title : "http://www.maalaimalar.com/RSS/SectionRssFeed.aspx?Id=114&Main=2",
+					description : "Maalai Malar - Cinema",
+					icon : "sap-icon://discussion",
+
+				},
+				{
+
+					title : "http://scn.sap.com/community/developer-center/front-end/blog/feeds/posts",
+					description : "SAPUI5 Space Blogs",
+					icon : "sap-icon://dimension",
+
+				},
+
+				{
+
+					title : "http://www.maalaimalar.com/RSS/SectionRssFeed.aspx?Id=114&Main=2",
+					description : "Maalai Malar - Cinema Kisu Kisu",
+					icon : "sap-icon://display",
+
+				}, ]
+	};
+
+	var oModel = new sap.ui.model.json.JSONModel();
+	oModel.setData(aData);
+
+	var oItemTemplate = new sap.m.StandardListItem({
+		title : "{title}",
+		description : "{description}",
+		icon : "{icon}",
+		type : "Active"
+	})
+
+	/* 1) select dialog with list binding and static parameters */
+	var oSelectDialog = new sap.m.SelectDialog("SelectDialog", {
+		title : "Choose SCN Feed for which you want to See Data",
+		noDataText : "Sorry, no feeds are available",
+	});
+
+	// set model & bind Aggregation
+	oSelectDialog.setModel(oModel);
+	oSelectDialog.bindAggregation("items", "/feedEntries", oItemTemplate);
+
+	// attach close listener
+	oSelectDialog.attachConfirm(function(oEvent) {
+		var selectedItem = oEvent.getParameter("selectedItem");
+		if (selectedItem) {
+			//oSuggestInput.setValue(selectedItem.getTitle());
+		}
+	});
+
+/*	var oSuggestInput = new sap.m.Input("suginput", {
+		placeholder : "Select SCN Feed",
+		showSuggestion : true,
+		showValueHelp : true,
+		valueHelpRequest : function(evt) {
+
+			// initiate model
+			oSelectDialog.setModel(oModel);
+
+			// bind aggregation with filters
+			oSelectDialog.bindAggregation("items", {
+				path : "/feedEntries",
+				template : oItemTemplate
+			});
+
+			// open dialog
+			oSelectDialog.open(oSuggestInput.getValue());
+
+		}
+	});
+	oSuggestInput.setModel(oModel);
+	oSuggestInput.bindAggregation("suggestionItems", "/feedEntries",
+			new sap.ui.core.Item({
+				text : "{title}"
+			}));*/
+
+	jQuery.sap.require("sap.ui.core.IconPool");
+
+/*	var oButtonDisplay = new sap.m.Button("display", {
+		type : sap.m.ButtonType.Default,
+		text : "Display",
+		icon : sap.ui.core.IconPool.getIconURI("display"),
+		enabled : true,
+		press : showData
+	});
+
+	var oButtonReset = new sap.m.Button("refresh", {
+		type : sap.m.ButtonType.Default,
+		text : "Refresh",
+		icon : sap.ui.core.IconPool.getIconURI("refresh"),
+		enabled : true,
+		press : resetData
+	});*/
+
+	showData("http://www.maalaimalar.com/RSS/SectionRssFeed.aspx?Id=1&Main=18");
+	
+	var oTileContainer = new sap.m.TileContainer('myTile');
+
+	function handlePress(oEvent) {
+		window.open(oEvent.oSource.getActiveIcon(), "target=_blank");
+	}
+
+	function showData(url) {
+
+		if (!oSuggestInput.getValue()) {
+			jQuery.sap.require("sap.m.MessageBox");
+			sap.m.MessageBox.alert("Complete your input first.");
+			return;
+		}
+
+		var data = {
+			FeedCollection : []
+		};
+
+		//var urlFeed = oSuggestInput.getValue();
+		var urlFeed = url;
+		
+		$.jGFeed(urlFeed, function(feeds) {
+			if (!feeds.entries.length) {
+				// there was an error
+				jQuery.sap.require("sap.m.MessageToast");
+				sap.m.MessageToast.show("No Data Found!");
+			}
+
+			else {
+
+				for ( var i = 0; i < feeds.entries.length; i++) {
+					var entry = feeds.entries[i];
+
+					var FeedArray = {};
+
+					var date = new Date(entry.publishedDate);
+
+					var months = Array("January", "February", "March", "April",
+							"May", "June", "July", "August", "September",
+							"October", "November", "December");
+					var string = date.getDate() + " " + months[date.getMonth()]
+							+ " " + date.getFullYear();
+
+					FeedArray.Number = string;
+					//  FeedArray.Title = entry.title;
+					FeedArray.Title = entry.contentSnippet;
+					FeedArray.Info = entry.author;
+					FeedArray.ActiveIcon = entry.link;
+					var fName = entry.author.substr(0, entry.author
+							.indexOf(' '));
+					var lName = entry.author
+							.substr(entry.author.indexOf(' ') + 1);
+					var fullName = fName.toLowerCase() + "."
+							+ lName.toLowerCase();
+					/*  var iconUrl = 'http://scn.sap.com/people/' + fullName + '/avatar/46.png';
+					  FeedArray.Icon = iconUrl;*/
+
+					data.FeedCollection.push({
+						Feed : FeedArray
+					});
+				}
+
+				var oModel = new sap.ui.model.json.JSONModel(data);
+
+				var oTiles = new sap.m.StandardTile({
+					icon : "{Feed/Icon}",
+					number : "{Feed/Number}",
+					title : "{Feed/Title}",
+					info : "{Feed/Info}",
+					activeIcon : "{Feed/ActiveIcon}",
+					press : handlePress
+				})
+
+				oTileContainer.bindAggregation("tiles", {
+					path : "/FeedCollection",
+					template : oTiles
+				});
+				oTileContainer.setModel(oModel);
+			}
+		}, 30);
+
+	}
+
+	function resetData(oEvent) {
+
+		oTileContainer.destroyTiles();
+		oSuggestInput.setValue();
+
+	}
+
+	var oContainer = new sap.ui.unified.SplitContainer({
+		content : [ 
+		            //Bar, 
+		          //  oSuggestInput, oButtonDisplay, oButtonReset,
+				oTileContainer
+
+		],
+		secondaryContent : [ new sap.ui.commons.Button({
+			text : "Content",
+			width : "100%",
+			height : "80%",
+			lite : true
+		}),
+
+		]
+	});
+
+	//oContainer.placeAt("content");
