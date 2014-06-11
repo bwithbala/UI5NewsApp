@@ -190,12 +190,13 @@ alert("inside Tile.Js");
 		            Bar, 
    			    	oTileContainer
 		],
-		secondaryContent : [ new sap.ui.commons.Button({
+		secondaryContent : [ 
+		         /*            new sap.ui.commons.Button({
 			text : "Content",
 			width : "100%",
 			height : "100%",
 			lite : true
-		}),
+		}),*/
 
 		]
 	});
