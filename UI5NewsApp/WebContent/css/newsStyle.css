@@ -5,6 +5,25 @@
 	back-ground:green;
 }
 
+
+.sapMStdTileBottomRow{
+    position:absolute;
+    width: 200px;
+    height: 200px;    
+  }
+
+.sapMStdTileTitle{
+    font-size:3pt;
+    position:absolute;
+    width: 200px;
+    height: 150px;    
+	font-family:times new roman;
+    font-weight:bold;
+	font-style:italic;
+	color:green;    
+}
+
+/*
 #myTile{
     top:0px;
     left:0px;
@@ -16,7 +35,7 @@
 .sapMTileContent{
     top:0px;
     left:0px;
- /*   background-color:  #b0c4de;*/
+   background-color:  #b0c4de;
     font-size:3pt;
     position:absolute;
     width: 600px;
@@ -36,7 +55,7 @@
 	font-size:3pt;
 	color: green;
 	/*margin-top: -0.125rem; 
-	height: 20px;*/
+	height: 20px;
 	
 }
 
@@ -52,12 +71,12 @@
 }
 
 .sapMStdTileTitle{
-/*	white-space: nowrap;
+	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	text-align: start;
 	font-size:6pt;
-	color: Blue;*/
+	color: Blue;
 	
 background-color:transparent;
 position: absolute;
@@ -73,3 +92,4 @@ font-style:italic;
 color:green;	
 	   
 }
+*/
