@@ -181,7 +181,6 @@
 
 	jQuery.sap.require("sap.ui.core.IconPool");
 
-
 	showData(selectedMainPaper);
 	
 	var oTileContainer = new sap.m.TileContainer('myTile',{		
