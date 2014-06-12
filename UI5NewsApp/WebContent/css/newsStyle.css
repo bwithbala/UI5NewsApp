@@ -5,12 +5,11 @@
 	back-ground:green;
 }
 
-
 .sapMStdTileBottomRow{
     position:absolute;
     width: 200px;
     height: 200px;    
-  }
+}
 
 .sapMStdTileTitle{
     font-size:3pt;
