@@ -210,12 +210,35 @@
 		var link = str.concat(oEvent.oSource.getActiveIcon()); 
 		link = link.concat(str);
 		
-		alert("Link: " +link);
+		var w = window.innerWidth;
+		alert("inner width" + w);
+		var h = window.innerHeight;
+		alert("inner Height" + h);
+		
+		var strHeight = "height=";
+		var strWidth = " width=";
+		var px = "px";
+		var strConcat = strHeight.concat(h);
+		strConcat = strConcat.concat(px);
+		strConcat = strConcat.concat(strWidth);
+		strConcat = strConcat.concat(w);
+		strConcat = strConcat.concat(px);
+		alert("strConcat" +strConcat);
+		
+		
+		/*var ow = window.outerWidth; //including toolbars and status bar etc.
+		alert("outer Width " + ow);
+		var oh = window.outerHeight;
+		alert("outer Height " + oh);*/
+		
+		
+		//alert("Link: " +link);
 		
 		var HtmlIFrame = new sap.ui.core.HTML({
 			  content:
-			          "<iframe src=" + link +
-			         "height=500px width=1200px>" + "</iframe>" 
+			          "<iframe src=" + link + strConcat
+			         //"height=500px width=1200px>" 
+			          + "</iframe>" 
 			          
 		});			
 		
