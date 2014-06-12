@@ -1,22 +1,99 @@
 
-	oSelectNewsPaper = new sap.m.Select({
-		type : sap.m.SelectType.Default,
-		autoAdjustWidth : true,
-		items : [ oItemMaalaiMalar = new sap.ui.core.Item({
-			key : "0",
-			text : "Maalai Malar",
-		}),
 
-		oItemDailyThanthi = new sap.ui.core.Item({
-			key : "1",
-			text : "Daily Thanthi",
-		}),
+    var selectedMainPaper = "http://www.maalaimalar.com/RSS/SectionRssFeed.aspx?Id=1&Main=18";
+    
+	
+	//	create JSON model instance
+	var oModel = new sap.ui.model.json.JSONModel();
 
-		oItemDinaKaran = new sap.ui.core.Item({
-			key : "2",
-			text : "Dina Karan",
-		}) ]
+	// JSON sample data
+	var mData = {
+
+		// path : items
+		"items" : [
+			{
+				"value": "0",
+				"text": "Maalai Malar"
+				
+			},
+
+			{
+				"value": "1",
+				"text": "Daily Thanthi"
+				
+			},
+
+			{
+				"value": "2",
+				"text": "Dina Karan"
+				
+				
+			},
+
+			{
+				"value": "3",
+				"text": "Dina Mani"
+				
+			}
+
+		],
+
+		// path : selectedKey
+		"selected": "5"
+	};
+
+	// set the data for the model
+	oModel.setData(mData);
+
+	// set the model to the core
+	sap.ui.getCore().setModel(oModel);
+
+	var oItemTemplate = new sap.ui.core.Item({
+		key: "{value}",
+		text: "{text}"
 	});
+
+	// select
+	var oSelect0 = new sap.m.Select({
+		items: {
+			path: "/items", template: oItemTemplate
+		},
+
+		selectedKey: {
+			path : "/selected",
+			template: "{selected}"
+		},
+
+		change: function(oControlEvent) {
+	
+			alert("Selected Item:" +oControlEvent.getParameter("selectedItem").getKey());
+            
+			var selectedKey = oControlEvent.getParameter("selectedItem").getKey();
+			
+			if (selectedKey == 0) {
+				
+				selectedMainPaper = "http://www.maalaimalar.com/RSS/SectionRssFeed.aspx?Id=1&Main=18";
+				
+			}
+			
+			if (selectedKey == 1) {
+				selectedMainPaper = "http://www.dailythanthi.com/RSS/SectionRssFeed.aspx?Main=2&Id=6";
+			}
+			
+			
+			if (selectedKey == 2) {
+				selectedMainPaper = "http://www.dinakaran.com/rss_Latest.asp";
+			}
+			
+			if (selectedKey == 3) {
+				selectedMainPaper = "http://demo.dinamani.com/edition/rssSectionXml.aspx?SectionId=129";
+			}
+			
+			alert("Selected URL" +selectedMainPaper);
+			showData(selectedMainPaper);
+		}
+	});	
+		
 
 	var d = sap.ui.Device;
 	
@@ -42,15 +119,16 @@
 			}
 		}) ],
 		
-		contentMiddle : [ oSelectNewsPaper
+		contentMiddle : [ 
+		                  //oSelectNewsPaper
+		                  oSelect0
 
 		],
 	//contentRight: [new sap.m.Button('Button1', {text: "Edit"})]
 	});
 
 
-
-	var aData = {
+/*	var aData = {
 		feedEntries : [
 				{
 
@@ -93,6 +171,7 @@
 	var oModel = new sap.ui.model.json.JSONModel();
 	oModel.setData(aData);
 
+*/
 	var oItemTemplate = new sap.m.StandardListItem({
 		title : "{title}",
 		description : "{description}",
@@ -103,17 +182,56 @@
 	jQuery.sap.require("sap.ui.core.IconPool");
 
 
-	showData("http://www.maalaimalar.com/RSS/SectionRssFeed.aspx?Id=1&Main=18");
+	showData(selectedMainPaper);
 	
 	var oTileContainer = new sap.m.TileContainer('myTile',{		
 		    width : "100%",
 			height : "100%"});
 
+	var oOverlay = new sap.ui.ux3.OverlayContainer({openButtonVisible:false,width:"1200px",height:"500px"});
+	
+	 oOverlay.attachClose(function(oControlEvent) { 
+	    	var id = oControlEvent.getParameters().id;
+	    	oOverlay.removeAllContent();
+	    //	alert("Thing \""+ id+ "\"closed");
+	    });
+	    oOverlay.attachOpen(function(oControlEvent) {
+			var id = oControlEvent.getParameters().id;
+		//	alert("Thing \"" + id + "\"open triggered");
+		});
+/*	    oOverlay.attachOpenNew(function(oControlEvent) {
+			var id = oControlEvent.getParameters().id;
+			//alert("Thing \"" + id + "\"openNew triggered");
+		});	*/
+	
 	function handlePress(oEvent) {
-		window.open(oEvent.oSource.getActiveIcon(), "target=_blank");
+		
+		
+		var str = "'";
+		var link = str.concat(oEvent.oSource.getActiveIcon()); 
+		link = link.concat(str);
+		
+		alert("Link: " +link);
+		
+		var HtmlIFrame = new sap.ui.core.HTML({
+			  content:
+			          "<iframe src=" + link +
+			         "height=500px width=1200px>" + "</iframe>" 
+			          
+		});			
+		
+	//	alert("HtmlIFrame:" +HtmlIFrame);
+		oOverlay.addContent(
+				HtmlIFrame
+		);
+	//	window.open(oEvent.oSource.getActiveIcon(), "target=_blank");
+    	oOverlay.open();
+
+		
 	}
 
 	function showData(url) {
+		alert("Url inside Show Data" +url);
 
 		var data = {
 			FeedCollection : []
