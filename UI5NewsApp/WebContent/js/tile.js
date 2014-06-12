@@ -203,7 +203,7 @@
 	strConcat = strConcat.concat(px);
 	alert("strConcat" +strConcat);	
 	
-	var oOverlay = new sap.ui.ux3.OverlayContainer({openButtonVisible:false,width: w,height: h});
+	var oOverlay = new sap.ui.ux3.OverlayContainer({openButtonVisible:false});
 	
 	 oOverlay.attachClose(function(oControlEvent) { 
 	    	var id = oControlEvent.getParameters().id;
