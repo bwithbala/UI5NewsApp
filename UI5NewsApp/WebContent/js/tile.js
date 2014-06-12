@@ -246,6 +246,8 @@
 			          
 		});			
 		
+		HtmlIFrame.addStyleClass("IframeClass");
+		
 	//	alert("HtmlIFrame:" +HtmlIFrame);
 		oOverlay.addContent(
 				HtmlIFrame
