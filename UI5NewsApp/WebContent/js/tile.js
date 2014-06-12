@@ -236,7 +236,8 @@
 		
 		var HtmlIFrame = new sap.ui.core.HTML({
 			  content:
-			          "<iframe src=" + link + strConcat
+			          "<iframe src=" + link 
+			          //+ strConcat
 			         //"height=500px width=1200px>" 
 			          + "scrolling='yes'" 
 			          + "</iframe>" 
