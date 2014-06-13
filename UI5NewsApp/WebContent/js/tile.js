@@ -238,6 +238,7 @@
 		
 		//alert("Link: " +link);
 		var scrolling = "scrolling=yes";
+		var style     = "class='noScrolling'";
 		
 		
 		var HtmlIFrame = new sap.ui.core.HTML({
@@ -245,7 +246,8 @@
 			          "<iframe src=" + link 
 			        // + strConcat
 			         //"height=500px width=1200px>" 
-			          + scrolling  
+			        +  style
+			         // + scrolling  
 			          + "</iframe>" 
 			          
 		});			
