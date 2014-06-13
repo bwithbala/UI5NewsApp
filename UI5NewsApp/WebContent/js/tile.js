@@ -1,8 +1,6 @@
 
-
     var selectedMainPaper = "http://www.maalaimalar.com/RSS/SectionRssFeed.aspx?Id=1&Main=18";
     
-	
 	//	create JSON model instance
 	var oModel = new sap.ui.model.json.JSONModel();
 
@@ -14,28 +12,22 @@
 			{
 				"value": "0",
 				"text": "Maalai Malar"
-				
 			},
 
 			{
 				"value": "1",
 				"text": "Daily Thanthi"
-				
 			},
 
 			{
 				"value": "2",
 				"text": "Dina Karan"
-				
-				
 			},
 
 			{
 				"value": "3",
 				"text": "Dina Mani"
-				
 			}
-
 		],
 
 		// path : selectedKey
@@ -58,15 +50,12 @@
 		items: {
 			path: "/items", template: oItemTemplate
 		},
-
 		selectedKey: {
 			path : "/selected",
 			template: "{selected}"
 		},
-
 		change: function(oControlEvent) {
-	
-			alert("Selected Item:" +oControlEvent.getParameter("selectedItem").getKey());
+			//alert("Selected Item:" +oControlEvent.getParameter("selectedItem").getKey());
             
 			var selectedKey = oControlEvent.getParameter("selectedItem").getKey();
 			
@@ -89,14 +78,13 @@
 				selectedMainPaper = "http://demo.dinamani.com/edition/rssSectionXml.aspx?SectionId=129";
 			}
 			
-			alert("Selected URL" +selectedMainPaper);
+		//	alert("Selected URL" +selectedMainPaper);
 			showData(selectedMainPaper);
 		}
 	});	
 		
 
 	var d = sap.ui.Device;
-	
 	var Bar = new sap.m.Bar({
 		contentLeft : [ new sap.m.Button('SlideRight', {
 			icon : sap.ui.core.IconPool.getIconURI("menu2"),
@@ -122,7 +110,6 @@
 		contentMiddle : [ 
 		                  //oSelectNewsPaper
 		                  oSelect0
-
 		],
 	//contentRight: [new sap.m.Button('Button1', {text: "Edit"})]
 	});
@@ -190,10 +177,10 @@
 	
 	var w = window.innerWidth;
 	w = w - 350;
-	alert("inner width" + w);
+	//alert("inner width" + w);
 	var h = window.innerHeight;
 	h = h - 350;
-	alert("inner Height" + h);
+	//alert("inner Height" + h);
 	
 	var strHeight = "height=";
 	var strWidth = " width=";
@@ -204,10 +191,10 @@
 	strConcat = strConcat.concat(strWidth);
 	strConcat = strConcat.concat(w);
 	strConcat = strConcat.concat(px);
-	alert("strConcat" +strConcat);	
+	//alert("strConcat" +strConcat);	
 	
 	var oOverlay = new sap.ui.ux3.OverlayContainer({openButtonVisible:false});
-	oOverlay.addStyleClass("overlay"); 
+	//oOverlay.addStyleClass("overlay"); 
 	
 	 oOverlay.attachClose(function(oControlEvent) { 
 	    	var id = oControlEvent.getParameters().id;
@@ -249,7 +236,7 @@
 			          + "</iframe>" 
 		});			
 		
-		HtmlIFrame.addStyleClass("IframeClass");
+		//HtmlIFrame.addStyleClass("IframeClass");
 		
 	//	alert("HtmlIFrame:" +HtmlIFrame);
 		oOverlay.addContent(
@@ -294,18 +281,19 @@
 							+ " " + date.getFullYear();
 
 					FeedArray.Number = string;
-					//  FeedArray.Title = entry.title;
-					FeedArray.Title = entry.contentSnippet;
+					FeedArray.Title = entry.title;
+					FeedArray.Content = entry.contentSnippet;
 					FeedArray.Info = entry.author;
 					FeedArray.ActiveIcon = entry.link;
+					
 					var fName = entry.author.substr(0, entry.author
 							.indexOf(' '));
 					var lName = entry.author
 							.substr(entry.author.indexOf(' ') + 1);
 					var fullName = fName.toLowerCase() + "."
 							+ lName.toLowerCase();
-					/*  var iconUrl = 'http://scn.sap.com/people/' + fullName + '/avatar/46.png';
-					  FeedArray.Icon = iconUrl;*/
+					/*var iconUrl = 'http://scn.sap.com/people/' + fullName + '/avatar/46.png';
+					FeedArray.Icon = iconUrl; */
 
 					data.FeedCollection.push({
 						Feed : FeedArray
@@ -317,11 +305,12 @@
 				var oTiles = new sap.m.StandardTile({
 					icon : "{Feed/Icon}",
 					number : "{Feed/Number}",
-					title : "{Feed/Title}",
+					numberUnit: "{Feed/Title}",
+					title : "{Feed/Content}",
 					info : "{Feed/Info}",
 					activeIcon : "{Feed/ActiveIcon}",
 					press : handlePress
-				})
+				});
 
 				oTileContainer.bindAggregation("tiles", {
 					path : "/FeedCollection",
@@ -354,6 +343,6 @@
 
 		]
 	});
-	oContainer.addStyleClass("myContainerClass");
+	//oContainer.addStyleClass("myContainerClass");
 	
 	oContainer.placeAt("content");
