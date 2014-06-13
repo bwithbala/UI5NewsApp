@@ -189,10 +189,10 @@
 
 	
 	var w = window.innerWidth;
-	w = w - 300;
+	w = w - 350;
 	alert("inner width" + w);
 	var h = window.innerHeight;
-	h = h - 300;
+	h = h - 350;
 	alert("inner Height" + h);
 	
 	var strHeight = "height=";
