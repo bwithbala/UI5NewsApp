@@ -6,12 +6,41 @@
 	word-wrap: break-word;
 }
 
-#myTile{
-    top:0px;
-    left:0px;
-    background-color: #b0c4de;
-    position:static;
-    
+sapMStdTileNumDiv {
+    height:0px;
+}
+
+.sapMStdTileTopRow {
+	font-size: 8px;
+	color: blue;
+    margin-top: -0.250rem;
+    height:0px;
+}
+
+.sapMStdTileNumS {
+	font-size: 10px;
+	color: blue;
+    margin-top: -0.125rem;
+}
+
+.sapMStdTileInfo {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-align: start;
+	font-size: 12px;
+	color: red;
+	margin-top: 2rem;
+}
+
+.sapMStdTileTitle {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-align: start;
+	font-size: 6px;
+	color: green;
+	margin-top: 0.5rem;
+	height:500px;
 }
 
 .sapMTCEdgeLeft {

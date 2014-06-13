@@ -193,7 +193,7 @@
 	strConcat = strConcat.concat(px);
 	//alert("strConcat" +strConcat);	
 	
-	var oOverlay = new sap.ui.ux3.OverlayContainer({openButtonVisible:false});
+	var oOverlay = new sap.ui.ux3.OverlayContainer('myOverlay',{openButtonVisible:false});
 	//oOverlay.addStyleClass("overlay"); 
 	
 	 oOverlay.attachClose(function(oControlEvent) { 
@@ -249,7 +249,7 @@
 	}
 
 	function showData(url) {
-		alert("Url inside Show Data" +url);
+	//	alert("Url inside Show Data" +url);
 
 		var data = {
 			FeedCollection : []
@@ -302,7 +302,7 @@
 
 				var oModel = new sap.ui.model.json.JSONModel(data);
 
-				var oTiles = new sap.m.StandardTile({
+				var oTiles = new sap.m.StandardTile('myTilesList',{
 					icon : "{Feed/Icon}",
 					number : "{Feed/Number}",
 					numberUnit: "{Feed/Title}",
