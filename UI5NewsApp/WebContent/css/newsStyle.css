@@ -30,7 +30,7 @@
 .noScrolling{
            width: 90%; /*or any other size*/
            height: 90%; /*or any other size*/
-           overflow: hidden;
+         //  overflow: hidden;
         }
 
 .IframeClass{
