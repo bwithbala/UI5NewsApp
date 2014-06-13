@@ -225,7 +225,6 @@
 	
 	function handlePress(oEvent) {
 		
-		
 		var str = "'";
 		var link = str.concat(oEvent.oSource.getActiveIcon()); 
 		link = link.concat(str);
@@ -240,7 +239,6 @@
 		var scrolling = "scrolling=yes";
 		var style     = "class='noScrolling'";
 		
-		
 		var HtmlIFrame = new sap.ui.core.HTML({
 			  content:
 			          "<iframe src=" + link 
@@ -249,7 +247,6 @@
 			        +  style
 			          + scrolling  
 			          + "</iframe>" 
-			          
 		});			
 		
 		HtmlIFrame.addStyleClass("IframeClass");
