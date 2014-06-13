@@ -6,6 +6,26 @@
 }
 
 
+.overlay {
+            
+		/* background-color: rgba(0,0,0,0.6);
+		background-color: #ccc;
+		display: none;
+		height: 100%;
+		left: 0;
+		position: fixed;
+		top: 0;
+		overflow-y: auto;
+		width: 90%;
+		z-index: -1;    
+		opacity:0.5;  
+		background-color: #ccc; */
+		height: 100%;
+		width: 90%;
+		overflow-y: auto;
+		z-index: -1;   
+   }
+
 .IframeClass{
 display: block; border: none; width: 100%; height: 100%;	
 }

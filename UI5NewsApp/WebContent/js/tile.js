@@ -207,6 +207,7 @@
 	alert("strConcat" +strConcat);	
 	
 	var oOverlay = new sap.ui.ux3.OverlayContainer({openButtonVisible:false});
+	oOverlay.addStyleClass("overlay"); 
 	
 	 oOverlay.attachClose(function(oControlEvent) { 
 	    	var id = oControlEvent.getParameters().id;
