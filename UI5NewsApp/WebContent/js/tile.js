@@ -189,14 +189,17 @@
 
 	
 	var w = window.innerWidth;
+	w = w - 300;
 	alert("inner width" + w);
 	var h = window.innerHeight;
+	h = h - 300;
 	alert("inner Height" + h);
 	
 	var strHeight = "height=";
 	var strWidth = " width=";
 	var px = "px";
 	var strConcat = strHeight.concat(h);
+	
 	strConcat = strConcat.concat(px);
 	strConcat = strConcat.concat(strWidth);
 	strConcat = strConcat.concat(w);
