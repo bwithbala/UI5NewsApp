@@ -18,19 +18,19 @@ sapMStdTileNumDiv {
 }
 
 .sapMStdTileNumS {
-	font-size: 10px;
-	color: blue;
-    margin-top: -0.125rem;
+font-size: 1rem;
+color:green;
+margin-top: -0.125rem;
 }
 
 .sapMStdTileInfo {
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	text-align: start;
-	font-size: 12px;
-	color: red;
-	margin-top: 2rem;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+text-align: start;
+font-size: 0.8rem;
+color:red;
+margin-top: 2rem;
 }
 
 .sapMStdTileTitle {
